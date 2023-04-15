@@ -16,9 +16,17 @@ public class MoodAnalyser {
 
 	// Analysis mood method using the message field
 	public String analysisMood() {
-		if (message.contains("Sad")) {
-			return "SAD";
-		} else {
+		try {
+			if (message == null || message.isEmpty()) {
+				throw new InvalidMoodException("Invalid mood: Mood message cannot be null or empty.");
+			} else if (message.contains("Sad")) {
+				return "SAD";
+			} else {
+				return "HAPPY";
+			}
+		} catch (InvalidMoodException e) {
+			// Handle the exception and return "HAPPY" as default value
+			System.out.println(e.getMessage());
 			return "HAPPY";
 		}
 	}
